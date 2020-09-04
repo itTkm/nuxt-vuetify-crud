@@ -106,9 +106,9 @@ export default {
       { code: 'ja', iso: 'ja-JP', file: 'ja.json' },
       { code: 'en', iso: 'en-US', file: 'en.json' },
     ],
-    defaultLocale: 'en',
+    defaultLocale: 'ja',
     vueI18n: {
-      fallbackLocale: 'en',
+      fallbackLocale: 'ja',
     },
     lazy: true,
     langDir: 'lang/',

@@ -1,7 +1,15 @@
 {
   "menu": {
     "index": "ようこそ",
-    "inspire": "刺激する"
+    "inspire": "刺激する",
+    "todos": "ToDo",
+    "users": "ユーザー"
+  },
+  "common": {
+    "create": "新規作成",
+    "edit": "編集",
+    "delete": "削除",
+    "save": "保存"
   },
   "index": {
     "cardTitle": "ようこそ ",
@@ -20,5 +28,32 @@
   "inspire": {
     "message": "まず、問題を解決します。 次に、コードを記述します。",
     "from": "John Johnson"
+  },
+  "todos": {
+    "title": "タイトル",
+    "userId": "ユーザーID",
+    "completed": "完了"
+  },
+  "users": {
+    "name": "氏名",
+    "username": "ユーザー名",
+    "email": "メールアドレス",
+    "address": {
+      "street": "住所2",
+      "suite": "住所1",
+      "city": "都市",
+      "zipcode": "郵便番号",
+      "geo": {
+        "lat": "緯度",
+        "lng": "経度"
+      }
+    },
+    "phone": "電話番号",
+    "website": "ウェブサイト",
+    "company": {
+      "name": "会社名",
+      "catchPhrase": "キャッチフレーズ",
+      "bs": "bs"
+    }
   }
 }

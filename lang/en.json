@@ -1,7 +1,9 @@
 {
   "menu": {
     "index": "Welcome",
-    "inspire": "Inspire"
+    "inspire": "Inspire",
+    "todos": "ToDos",
+    "users": "Users"
   },
   "index": {
     "cardTitle": "Welcome to the ",
@@ -20,5 +22,10 @@
   "inspire": {
     "message": "First, solve the problem. Then, write the code.",
     "from": "John Johnson"
+  },
+  "todos": {
+    "title": "Title",
+    "userId": "User ID",
+    "completed": "Completed"
   }
 }

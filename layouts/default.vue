@@ -83,6 +83,16 @@ export default {
           title: this.$t('menu.inspire'),
           to: this.localePath('inspire', this.$i18n.locale),
         },
+        {
+          icon: 'mdi-format-list-checks',
+          title: this.$t('menu.todos'),
+          to: this.localePath('todos', this.$i18n.locale),
+        },
+        {
+          icon: 'mdi-account-multiple',
+          title: this.$t('menu.users'),
+          to: this.localePath('users', this.$i18n.locale),
+        },
       ],
     }
   },
@@ -139,13 +149,13 @@ export default {
     getLanguage() {
       return localStorage.getItem('lang') !== null
         ? localStorage.getItem('lang')
-        : 'en'
+        : 'ja'
     },
     getNextLanguage() {
-      if (this.lang === '' || this.lang === 'en') {
-        return 'ja'
-      } else {
+      if (this.lang === '' || this.lang === 'ja') {
         return 'en'
+      } else {
+        return 'ja'
       }
     },
   },
