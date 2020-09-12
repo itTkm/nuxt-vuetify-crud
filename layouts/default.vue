@@ -109,11 +109,13 @@ export default {
           icon: 'mdi-format-list-checks',
           title: this.$t('menu.todos'),
           to: this.localePath('todos', this.$i18n.locale),
+          exact: false, // If the page has child pages (e.g. /inspire/edit), it should be "false".
         },
         {
           icon: 'mdi-account-multiple',
           title: this.$t('menu.users'),
           to: this.localePath('users', this.$i18n.locale),
+          exact: false, // If the page has child pages (e.g. /inspire/edit), it should be "false".
         },
       ],
     }
