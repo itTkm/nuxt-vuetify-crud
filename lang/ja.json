@@ -60,5 +60,7 @@
       "catchPhrase": "キャッチフレーズ",
       "bs": "bs"
     }
-  }
+  },
+  "switchLanguage": "言語切替",
+  "switchTheme": "テーマ切替"
 }

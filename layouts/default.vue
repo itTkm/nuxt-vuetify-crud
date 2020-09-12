@@ -15,9 +15,14 @@
           router
           exact
         >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
+          <v-tooltip right>
+            <template v-slot:activator="{ on, attrs }">
+              <v-list-item-action v-bind="attrs" v-on="on">
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-action>
+            </template>
+            <span>{{ item.title }}</span>
+          </v-tooltip>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
@@ -38,12 +43,27 @@
       />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn icon :to="switchLocalePath(getNextLanguage())">
-        <v-icon>mdi-translate</v-icon>
-      </v-btn>
-      <v-btn icon @click="invertColors">
-        <v-icon>mdi-invert-colors</v-icon>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            :to="switchLocalePath(getNextLanguage())"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-translate</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ this.$t('switchLanguage') }}</span>
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on" @click="invertColors">
+            <v-icon>mdi-invert-colors</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ this.$t('switchTheme') }}</span>
+      </v-tooltip>
     </v-app-bar>
     <v-main>
       <v-container>

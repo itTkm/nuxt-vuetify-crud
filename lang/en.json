@@ -27,5 +27,7 @@
     "title": "Title",
     "userId": "User ID",
     "completed": "Completed"
-  }
+  },
+  "switchLanguage": "Switch language",
+  "switchTheme": "Switch theme"
 }
