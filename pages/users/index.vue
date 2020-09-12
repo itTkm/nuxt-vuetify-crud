@@ -2,18 +2,19 @@
   <section class="container">
     <div>
       <v-app>
-        <v-data-table
-          :headers="headers"
-          :items="lists"
-          :items-per-page="10"
-          @click:row="(r) => $router.push(`/todos/${r.id}`)"
-        >
-          <template v-slot:[`item.userId`]="{ item }">
-            <nuxt-link :to="`/users/${item.userId}`">
-              <v-chip>{{ item.userId }}</v-chip>
-            </nuxt-link>
-          </template>
-        </v-data-table>
+        <v-card>
+          <v-card-title>
+            {{ this.$t('menu.users') }} {{ this.$t('common.list') }}
+          </v-card-title>
+          <v-data-table
+            class="table-cursor"
+            :headers="headers"
+            :items="lists"
+            :items-per-page="10"
+            @click:row="(item) => show(item.id)"
+          >
+          </v-data-table>
+        </v-card>
       </v-app>
     </div>
   </section>
@@ -37,6 +38,16 @@ export default {
       ],
     }
   },
-  methods: {},
+  methods: {
+    show(id) {
+      this.$router.push(this.localePath('users', this.$i18n.locale) + `/${id}`)
+    },
+  },
 }
 </script>
+
+<style>
+.table-cursor tbody tr:hover {
+  cursor: pointer;
+}
+</style>

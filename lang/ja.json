@@ -9,7 +9,12 @@
     "create": "新規作成",
     "edit": "編集",
     "delete": "削除",
-    "save": "保存"
+    "deleteConfirm": "本当に削除しますか？",
+    "show": "参照",
+    "save": "保存",
+    "list": "一覧",
+    "cancel": "キャンセル",
+    "actions": "操作"
   },
   "index": {
     "cardTitle": "ようこそ ",
