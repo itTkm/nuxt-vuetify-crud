@@ -3,13 +3,11 @@
     <p>
       <v-card>
         <v-card-actions>
-          <v-btn icon @click="back()"><v-icon>mdi-arrow-left</v-icon></v-btn>
-          <v-btn icon @click="list()"><v-icon>mdi-view-list</v-icon></v-btn>
+          <back-btn />
+          <list-btn path="todos" />
           <v-spacer />
-          <v-btn icon color="red" @click="removeConfirm()"
-            ><v-icon>mdi-delete</v-icon></v-btn
-          >
-          <v-btn icon @click="reload()"><v-icon>mdi-reload</v-icon></v-btn>
+          <delete-btn :id="todo.id" path="todos" />
+          <reload-btn :id="todo.id" path="todos" @reloaded="reloaded" />
         </v-card-actions>
       </v-card>
     </p>
@@ -40,19 +38,24 @@
         </v-card-actions>
       </v-card>
     </p>
-    <delete-confirm ref="deleteConfirm"></delete-confirm>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import deleteConfirm from '@/components/deleteConfirm.vue'
+import backBtn from '@/components/button/back'
+import listBtn from '@/components/button/list'
+import deleteBtn from '@/components/button/delete'
+import reloadBtn from '@/components/button/reload'
+
 export default {
   components: {
-    deleteConfirm,
+    backBtn,
+    listBtn,
+    deleteBtn,
+    reloadBtn,
   },
   async fetch({ store }) {
-    // for direct access
     if (store.state.todos.list.length === 0) {
       await store.dispatch('todos/fetchList')
     }
@@ -71,28 +74,14 @@ export default {
     this.todo = Object.assign({}, this.getById(this.$route.params.id))
   },
   methods: {
-    back() {
-      this.$router.go(-1)
-    },
-    list() {
-      this.$router.push(this.localePath('todos', this.$i18n.locale))
+    reloaded(item) {
+      this.todo = item
     },
     async save() {
       await this.$store.dispatch('todos/update', this.todo)
       this.$router.push(
         this.localePath('todos', this.$i18n.locale) + `/${this.todo.id}`
       )
-    },
-    async removeConfirm() {
-      if (await this.$refs.deleteConfirm.open()) {
-        this.remove()
-      } else {
-        // Do something in case of "cancel"
-      }
-    },
-    async remove() {
-      await this.$store.dispatch('todos/delete', this.todo)
-      this.$router.push(this.localePath('todos', this.$i18n.locale))
     },
   },
 }

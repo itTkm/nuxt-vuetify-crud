@@ -3,8 +3,8 @@
     <p>
       <v-card>
         <v-card-actions>
-          <v-btn icon @click="back()"><v-icon>mdi-arrow-left</v-icon></v-btn>
-          <v-btn icon @click="list()"><v-icon>mdi-view-list</v-icon></v-btn>
+          <back-btn />
+          <list-btn path="todos" />
           <v-spacer />
         </v-card-actions>
       </v-card>
@@ -40,7 +40,14 @@
 </template>
 
 <script>
+import backBtn from '@/components/button/back'
+import listBtn from '@/components/button/list'
+
 export default {
+  components: {
+    backBtn,
+    listBtn,
+  },
   data() {
     return {
       todo: {
@@ -51,12 +58,6 @@ export default {
     }
   },
   methods: {
-    back() {
-      this.$router.go(-1)
-    },
-    list() {
-      this.$router.push(this.localePath('todos', this.$i18n.locale))
-    },
     async create() {
       await this.$store.dispatch('todos/create', this.todo)
       this.$router.push(this.localePath('todos', this.$i18n.locale))

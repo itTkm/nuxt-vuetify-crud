@@ -30,9 +30,9 @@ export const mutations = {
       }
     })
   },
-  delete(state, data) {
+  delete(state, id) {
     state.list.forEach((item, index) => {
-      if (item.id === Number(data.id)) {
+      if (item.id === Number(id)) {
         state.list.splice(index, 1)
       }
     })
@@ -62,10 +62,10 @@ export const actions = {
       })
     commit('update', response)
   },
-  async delete({ commit }, item) {
-    await this.$axios.$delete(`${baseUrl}/${item.id}`).catch((err) => {
+  async delete({ commit }, id) {
+    await this.$axios.$delete(`${baseUrl}/${id}`).catch((err) => {
       throw err
     })
-    commit('delete', item)
+    commit('delete', id)
   },
 }

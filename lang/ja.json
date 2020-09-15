@@ -13,6 +13,8 @@
     "show": "参照",
     "save": "保存",
     "list": "一覧",
+    "back": "戻る",
+    "reload": "更新",
     "cancel": "キャンセル",
     "actions": "操作"
   },

@@ -3,10 +3,10 @@
     <p>
       <v-card>
         <v-card-actions>
-          <v-btn icon @click="back()"><v-icon>mdi-arrow-left</v-icon></v-btn>
+          <back-btn />
           <v-spacer />
-          <v-btn icon @click="create()"><v-icon>mdi-plus-circle</v-icon></v-btn>
-          <v-btn icon @click="reload()"><v-icon>mdi-reload</v-icon></v-btn>
+          <create-btn path="todos" />
+          <reload-btn path="todos" />
         </v-card-actions>
       </v-card>
     </p>
@@ -44,9 +44,16 @@
 
 <script>
 import deleteConfirm from '@/components/deleteConfirm.vue'
+import backBtn from '@/components/button/back'
+import createBtn from '@/components/button/create'
+import reloadBtn from '@/components/button/reload'
+
 export default {
   components: {
     deleteConfirm,
+    backBtn,
+    createBtn,
+    reloadBtn,
   },
   async fetch({ store }) {
     if (store.state.todos.list.length === 0) {
@@ -80,20 +87,11 @@ export default {
     },
   },
   methods: {
-    back() {
-      this.$router.go(-1)
-    },
-    async reload() {
-      await this.$store.dispatch('todos/fetchList')
-    },
     show(id) {
       this.$router.push(this.localePath('todos', this.$i18n.locale) + `/${id}`)
     },
     user(id) {
       this.$router.push(this.localePath('users', this.$i18n.locale) + `/${id}`)
-    },
-    create() {
-      this.$router.push(this.localePath('todos', this.$i18n.locale) + `/create`)
     },
     edit(id) {
       this.$router.push(
@@ -102,13 +100,13 @@ export default {
     },
     async removeConfirm(item) {
       if (await this.$refs.deleteConfirm.open(item)) {
-        this.remove(item)
+        this.remove(item.id)
       } else {
         // Do something in case of "cancel"
       }
     },
-    async remove(item) {
-      await this.$store.dispatch('todos/delete', item)
+    async remove(id) {
+      await this.$store.dispatch('todos/delete', id)
       this.$router.push(this.localePath('todos', this.$i18n.locale))
     },
   },
