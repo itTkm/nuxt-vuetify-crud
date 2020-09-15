@@ -4,10 +4,12 @@
       <v-card>
         <v-card-actions>
           <v-btn icon @click="back()"><v-icon>mdi-arrow-left</v-icon></v-btn>
+          <v-btn icon @click="list()"><v-icon>mdi-view-list</v-icon></v-btn>
           <v-spacer />
           <v-btn icon color="red" @click="removeConfirm()"
             ><v-icon>mdi-delete</v-icon></v-btn
           >
+          <v-btn icon @click="reload()"><v-icon>mdi-reload</v-icon></v-btn>
         </v-card-actions>
       </v-card>
     </p>
@@ -43,31 +45,43 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import deleteConfirm from '@/components/deleteConfirm.vue'
 export default {
   components: {
     deleteConfirm,
   },
-  async asyncData({ route, app }) {
-    const todo = await app.$axios.$get(
-      `https://jsonplaceholder.typicode.com/todos/${route.params.id}`
-    )
-    return {
-      todo,
+  async fetch({ store }) {
+    // for direct access
+    if (store.state.todos.list.length === 0) {
+      await store.dispatch('todos/fetchList')
     }
   },
   data() {
     return {
-      userId: this.$route.params.id,
+      todo: {},
     }
   },
+  computed: {
+    ...mapGetters({
+      getById: 'todos/getById',
+    }),
+  },
+  mounted() {
+    this.todo = Object.assign({}, this.getById(this.$route.params.id))
+  },
   methods: {
-    save() {},
     back() {
       this.$router.go(-1)
     },
     list() {
       this.$router.push(this.localePath('todos', this.$i18n.locale))
+    },
+    async save() {
+      await this.$store.dispatch('todos/update', this.todo)
+      this.$router.push(
+        this.localePath('todos', this.$i18n.locale) + `/${this.todo.id}`
+      )
     },
     async removeConfirm() {
       if (await this.$refs.deleteConfirm.open()) {
@@ -76,7 +90,10 @@ export default {
         // Do something in case of "cancel"
       }
     },
-    remove() {},
+    async remove() {
+      await this.$store.dispatch('todos/delete', this.todo)
+      this.$router.push(this.localePath('todos', this.$i18n.locale))
+    },
   },
 }
 </script>

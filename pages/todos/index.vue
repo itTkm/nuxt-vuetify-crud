@@ -1,40 +1,45 @@
 <template>
-  <section class="container">
-    <div>
-      <v-app>
-        <v-card>
-          <v-card-title>
-            {{ this.$t('menu.todos') }} {{ this.$t('common.list') }}
-          </v-card-title>
-          <v-data-table
-            class="table-cursor"
-            :headers="headers"
-            :items="lists"
-            :items-per-page="10"
-            @click:row="(item) => show(item.id)"
-          >
-            <template v-slot:[`item.userId`]="{ item }">
-              <v-chip @click.stop="user(item.userId)">{{ item.userId }}</v-chip>
-            </template>
-            <template v-slot:[`item.actions`]="{ item }">
-              <v-btn icon>
-                <v-icon small @click.stop="edit(item.id)"> mdi-pencil </v-icon>
-              </v-btn>
-              <v-btn icon color="red">
-                <v-icon small @click.stop="removeConfirm(item)">
-                  mdi-delete
-                </v-icon>
-              </v-btn>
-            </template>
-          </v-data-table>
-        </v-card>
-        <delete-confirm ref="deleteConfirm"></delete-confirm>
-        <v-btn dark fab bottom right fixed color="primary" @click="create()">
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
-      </v-app>
-    </div>
-  </section>
+  <div>
+    <p>
+      <v-card>
+        <v-card-actions>
+          <v-btn icon @click="back()"><v-icon>mdi-arrow-left</v-icon></v-btn>
+          <v-spacer />
+          <v-btn icon @click="create()"><v-icon>mdi-plus-circle</v-icon></v-btn>
+          <v-btn icon @click="reload()"><v-icon>mdi-reload</v-icon></v-btn>
+        </v-card-actions>
+      </v-card>
+    </p>
+    <p>
+      <v-card>
+        <v-card-title>
+          {{ this.$t('menu.todos') }} {{ this.$t('common.list') }}
+        </v-card-title>
+        <v-data-table
+          class="table-cursor"
+          :headers="headers"
+          :items="todos"
+          :items-per-page="10"
+          @click:row="(item) => show(item.id)"
+        >
+          <template v-slot:[`item.userId`]="{ item }">
+            <v-chip @click.stop="user(item.userId)">{{ item.userId }}</v-chip>
+          </template>
+          <template v-slot:[`item.actions`]="{ item }">
+            <v-btn icon>
+              <v-icon small @click.stop="edit(item.id)"> mdi-pencil </v-icon>
+            </v-btn>
+            <v-btn icon color="red">
+              <v-icon small @click.stop="removeConfirm(item)">
+                mdi-delete
+              </v-icon>
+            </v-btn>
+          </template>
+        </v-data-table>
+      </v-card>
+    </p>
+    <delete-confirm ref="deleteConfirm"></delete-confirm>
+  </div>
 </template>
 
 <script>
@@ -43,10 +48,10 @@ export default {
   components: {
     deleteConfirm,
   },
-  async asyncData({ app }) {
-    const baseUrl = 'https://jsonplaceholder.typicode.com/todos/'
-    const response = await app.$axios.$get(baseUrl)
-    return { lists: response }
+  async fetch({ store }) {
+    if (store.state.todos.list.length === 0) {
+      await store.dispatch('todos/fetchList')
+    }
   },
   data() {
     return {
@@ -69,12 +74,26 @@ export default {
       },
     }
   },
+  computed: {
+    todos() {
+      return this.$store.getters['todos/list']
+    },
+  },
   methods: {
+    back() {
+      this.$router.go(-1)
+    },
+    async reload() {
+      await this.$store.dispatch('todos/fetchList')
+    },
     show(id) {
       this.$router.push(this.localePath('todos', this.$i18n.locale) + `/${id}`)
     },
     user(id) {
       this.$router.push(this.localePath('users', this.$i18n.locale) + `/${id}`)
+    },
+    create() {
+      this.$router.push(this.localePath('todos', this.$i18n.locale) + `/create`)
     },
     edit(id) {
       this.$router.push(
@@ -83,14 +102,14 @@ export default {
     },
     async removeConfirm(item) {
       if (await this.$refs.deleteConfirm.open(item)) {
-        this.remove()
+        this.remove(item)
       } else {
         // Do something in case of "cancel"
       }
     },
-    remove(item) {},
-    create() {
-      this.$router.push(this.localePath('todos', this.$i18n.locale) + `/create`)
+    async remove(item) {
+      await this.$store.dispatch('todos/delete', item)
+      this.$router.push(this.localePath('todos', this.$i18n.locale))
     },
   },
 }
