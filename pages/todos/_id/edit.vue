@@ -14,17 +14,7 @@
     <p>
       <v-card>
         <v-card-title>{{ $t('common.edit') }}</v-card-title>
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
-          <v-card-text>
-            <todo-form :todo="todo" />
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn color="primary" :disabled="invalid" @click="save()">{{
-              $t('common.save')
-            }}</v-btn>
-          </v-card-actions>
-        </ValidationObserver>
+        <todo-form :todo="todo" @save="save" />
       </v-card>
     </p>
   </div>
@@ -32,7 +22,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { ValidationObserver } from 'vee-validate'
 import backBtn from '@/components/button/back'
 import listBtn from '@/components/button/list'
 import deleteBtn from '@/components/button/delete'
@@ -41,7 +30,6 @@ import todoForm from '@/components/form/todo'
 
 export default {
   components: {
-    ValidationObserver,
     backBtn,
     listBtn,
     deleteBtn,
