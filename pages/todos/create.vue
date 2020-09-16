@@ -11,42 +11,35 @@
     </p>
     <p>
       <v-card>
-        <v-card-title>{{ this.$t('common.create') }}</v-card-title>
-        <v-card-text>
-          <v-form>
-            <v-text-field
-              v-model="todo.title"
-              :label="this.$t('todos.title')"
-            ></v-text-field>
-            <v-text-field
-              v-model="todo.userId"
-              :label="this.$t('todos.userId')"
-            ></v-text-field>
-            <v-checkbox
-              v-model="todo.completed"
-              :label="this.$t('todos.completed')"
-            ></v-checkbox>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" @click="create()">{{
-            this.$t('common.save')
-          }}</v-btn>
-        </v-card-actions>
+        <v-card-title>{{ $t('common.create') }}</v-card-title>
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <v-card-text>
+            <todo-form :todo="todo" />
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn color="primary" :disabled="invalid" @click="create()">{{
+              $t('common.save')
+            }}</v-btn>
+          </v-card-actions>
+        </ValidationObserver>
       </v-card>
     </p>
   </div>
 </template>
 
 <script>
+import { ValidationObserver } from 'vee-validate'
 import backBtn from '@/components/button/back'
 import listBtn from '@/components/button/list'
+import todoForm from '@/components/form/todo'
 
 export default {
   components: {
+    ValidationObserver,
     backBtn,
     listBtn,
+    todoForm,
   },
   data() {
     return {
