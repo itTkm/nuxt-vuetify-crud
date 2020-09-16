@@ -63,6 +63,8 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    // Doc: https://github.com/mole-inc/nuxt-validate#readme
+    '@mole-inc/nuxt-validate',
     // Doc: https://i18n.nuxtjs.org/
     'nuxt-i18n',
   ],
@@ -96,6 +98,14 @@ export default {
         },
       },
     },
+  },
+  /**
+   ** nuxt-validate configuration
+   ** See https://github.com/mole-inc/nuxt-validate#readme
+   */
+  nuxtValidate: {
+    rules: ['required', 'regex', 'numeric'],
+    nuxti18n: true,
   },
   /**
    ** nuxt-i18n configuration

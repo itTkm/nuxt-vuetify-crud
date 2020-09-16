@@ -79,6 +79,12 @@
 </template>
 
 <script>
+// import {
+//   localize,
+// } from 'vee-validate'
+// import ja from 'vee-validate/dist/locale/ja.json'
+// import en from 'vee-validate/dist/locale/en.json'
+
 export default {
   data() {
     return {

@@ -1,11 +1,11 @@
 <template>
-  <ValidationObserver ref="observer" v-slot="{ invalid }">
+  <ValidationObserver v-slot="{ invalid }">
     <v-card-text>
       <v-form>
         <ValidationProvider
           v-slot="{ errors }"
           :name="$t('todos.title')"
-          rules="required"
+          rules="required|regex:^[a-zA-Z0-9\s]*$"
         >
           <v-text-field
             v-model="todo.title"
@@ -16,7 +16,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           :name="$t('todos.userId')"
-          rules="required"
+          rules="required|numeric"
         >
           <v-text-field
             v-model="todo.userId"
@@ -40,19 +40,7 @@
 </template>
 
 <script>
-import {
-  localize,
-  extend,
-  ValidationObserver,
-  ValidationProvider,
-} from 'vee-validate'
-import { required, between, ext } from 'vee-validate/dist/rules'
-import ja from 'vee-validate/dist/locale/ja.json'
-
-localize('ja', ja)
-extend('required', required)
-extend('between', between)
-extend('ext', ext)
+import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default {
   components: {
