@@ -1,8 +1,14 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn icon color="red" v-bind="attrs" v-on="on" @click="removeConfirm()">
-        <v-icon>mdi-delete</v-icon>
+      <v-btn
+        icon
+        color="red"
+        v-bind="attrs"
+        v-on="on"
+        @click.stop="removeConfirm()"
+      >
+        <v-icon :small="small">mdi-delete</v-icon>
       </v-btn>
       <delete-confirm ref="deleteConfirm"></delete-confirm>
     </template>
@@ -25,10 +31,20 @@ export default {
       type: Number,
       required: true,
     },
+    item: {
+      type: Object,
+      required: false,
+      default: null,
+    },
+    small: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   methods: {
     async removeConfirm() {
-      if (await this.$refs.deleteConfirm.open()) {
+      if (await this.$refs.deleteConfirm.open(this.item)) {
         this.remove()
       } else {
         // Do something in case of "cancel"

@@ -1,8 +1,8 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn icon v-bind="attrs" v-on="on" @click="edit()">
-        <v-icon>mdi-pencil</v-icon>
+      <v-btn icon v-bind="attrs" v-on="on" @click.stop="edit()">
+        <v-icon :small="small">mdi-pencil</v-icon>
       </v-btn>
     </template>
     <span>{{ $t('common.edit') }}</span>
@@ -19,6 +19,11 @@ export default {
     id: {
       type: Number,
       required: true,
+    },
+    small: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   methods: {

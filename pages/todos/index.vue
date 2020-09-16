@@ -13,27 +13,53 @@
     <p>
       <v-card>
         <v-card-title>
-          {{ this.$t('menu.todos') }} {{ this.$t('common.list') }}
+          {{ $t('menu.todos') }} {{ $t('common.list') }}
+          <v-spacer />
+          <filter-btn @click="filter.visible = !filter.visible" />
         </v-card-title>
+        <v-container v-if="filter.visible === true">
+          <v-row>
+            <v-spacer />
+            <v-col>
+              <v-text-field
+                v-model="filter.search"
+                append-icon="mdi-magnify"
+                :label="$t('common.search')"
+                single-line
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-select
+                v-model="filter.completed"
+                :items="filter.completedItems"
+                item-text="label"
+                item-value="value"
+                :label="$t('todos.completed')"
+                clearable
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-container>
         <v-data-table
           class="table-cursor"
           :headers="headers"
           :items="todos"
           :items-per-page="10"
+          :search="filter.search"
           @click:row="(item) => show(item.id)"
         >
           <template v-slot:[`item.userId`]="{ item }">
             <v-chip @click.stop="user(item.userId)">{{ item.userId }}</v-chip>
           </template>
+          <template v-slot:[`item.completed`]="{ item }">
+            <v-simple-checkbox
+              v-model="item.completed"
+              disabled
+            ></v-simple-checkbox>
+          </template>
           <template v-slot:[`item.actions`]="{ item }">
-            <v-btn icon>
-              <v-icon small @click.stop="edit(item.id)"> mdi-pencil </v-icon>
-            </v-btn>
-            <v-btn icon color="red">
-              <v-icon small @click.stop="removeConfirm(item)">
-                mdi-delete
-              </v-icon>
-            </v-btn>
+            <edit-btn :id="item.id" path="todos" small />
+            <delete-btn :id="item.id" path="todos" :item="item" small />
           </template>
         </v-data-table>
       </v-card>
@@ -47,6 +73,9 @@ import deleteConfirm from '@/components/deleteConfirm.vue'
 import backBtn from '@/components/button/back'
 import createBtn from '@/components/button/create'
 import reloadBtn from '@/components/button/reload'
+import editBtn from '@/components/button/edit'
+import deleteBtn from '@/components/button/delete'
+import filterBtn from '@/components/button/filter'
 
 export default {
   components: {
@@ -54,6 +83,9 @@ export default {
     backBtn,
     createBtn,
     reloadBtn,
+    editBtn,
+    deleteBtn,
+    filterBtn,
   },
   async fetch({ store }) {
     if (store.state.todos.list.length === 0) {
@@ -62,6 +94,15 @@ export default {
   },
   data() {
     return {
+      filter: {
+        visible: false,
+        search: '',
+        completed: '',
+        completedItems: [
+          { label: this.$t('todos.completed'), value: 'completed' },
+          { label: this.$t('todos.uncompleted'), value: 'uncompleted' },
+        ],
+      },
       headers: [
         {
           text: this.$t('todos.title'),
@@ -70,15 +111,18 @@ export default {
           value: 'title',
         },
         { text: this.$t('todos.userId'), value: 'userId' },
-        { text: this.$t('todos.completed'), value: 'completed' },
+        {
+          text: this.$t('todos.completed'),
+          value: 'completed',
+          filter: (value) => {
+            if (!this.filter.completed) return true
+            else if (this.filter.completed === 'completed' && value) return true
+            else if (this.filter.completed === 'uncompleted' && !value)
+              return true
+          },
+        },
         { text: this.$t('common.actions'), value: 'actions' },
       ],
-      deleteConfirm: {
-        dialog: false,
-        itemTitle: '',
-        itemUserId: '',
-        itemCompleted: false,
-      },
     }
   },
   computed: {
@@ -92,22 +136,6 @@ export default {
     },
     user(id) {
       this.$router.push(this.localePath('users', this.$i18n.locale) + `/${id}`)
-    },
-    edit(id) {
-      this.$router.push(
-        this.localePath('todos', this.$i18n.locale) + `/${id}/edit`
-      )
-    },
-    async removeConfirm(item) {
-      if (await this.$refs.deleteConfirm.open(item)) {
-        this.remove(item.id)
-      } else {
-        // Do something in case of "cancel"
-      }
-    },
-    async remove(id) {
-      await this.$store.dispatch('todos/delete', id)
-      this.$router.push(this.localePath('todos', this.$i18n.locale))
     },
   },
 }

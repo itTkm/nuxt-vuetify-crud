@@ -1,7 +1,7 @@
 <template>
   <v-tooltip bottom>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn icon v-bind="attrs" v-on="on" @click="create()">
+      <v-btn icon v-bind="attrs" v-on="on" @click.stop="create()">
         <v-icon>mdi-plus-circle</v-icon>
       </v-btn>
     </template>
