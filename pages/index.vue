@@ -1,61 +1,63 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          {{ $t('index.cardTitle') }} {{ require('../package.json').appName }}
-        </v-card-title>
-        <v-card-text>
-          <p v-html="$t('index.cardText.p1')"></p>
-          <p v-html="$t('index.cardText.p2')"></p>
-          <p v-html="$t('index.cardText.p3')"></p>
-          <p v-html="$t('index.cardText.p4')"></p>
-          <p v-html="$t('index.cardText.p5')"></p>
-          <div class="text-xs-right">
-            <em
-              ><small>&mdash; {{ $t('index.cardText.p6') }}</small></em
-            >
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ $t('index.nuxtDocumentation') }}
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ $t('index.nuxtGitHub') }}
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire">{{
-            $t('index.continue')
-          }}</v-btn>
-        </v-card-actions>
-      </v-card>
+      <v-container>
+        <v-row dense>
+          <v-col v-for="card in cards" :key="card.path">
+            <v-card shaped @click.stop="list(card.path)">
+              <v-img
+                class="white--text align-end"
+                :src="card.src"
+                gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.5)"
+                height="300px"
+              >
+                <v-card-title v-text="card.title" />
+              </v-img>
+              <v-card-text v-text="card.description" />
+              <v-card-actions>
+                <v-btn text @click.stop="create(card.path)">
+                  {{ $t('common.create') }}
+                </v-btn>
+                <v-spacer />
+                <v-btn text color="primary" @click.stop="list(card.path)">
+                  {{ $t('common.list') }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo,
+  data() {
+    return {
+      cards: [
+        {
+          path: 'todos',
+          title: this.$t('menu.todos'),
+          description: this.$t('todos.description'),
+          src: 'https://picsum.photos/id/8/400/300',
+        },
+        {
+          path: 'users',
+          title: this.$t('menu.users'),
+          description: this.$t('users.description'),
+          src: 'https://picsum.photos/id/433/400/300',
+        },
+      ],
+    }
+  },
+  methods: {
+    list(path) {
+      this.$router.push(this.localePath(path, this.$i18n.locale))
+    },
+    create(path) {
+      this.$router.push(this.localePath(path, this.$i18n.locale) + `/create`)
+    },
   },
   head() {
     return {

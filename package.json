@@ -1,6 +1,6 @@
 {
-  "name": "nuxt-vuetify-custom",
-  "appName": "Vuetify + Nuxt.js template (Customized)",
+  "name": "nuxt-vuetify-curd",
+  "appName": "Vuetify + Nuxt.js + CRUD",
   "version": "0.0.1",
   "author": "itTkm",
   "private": true,

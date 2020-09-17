@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import backBtn from '@/components/button/back'
 import listBtn from '@/components/button/list'
 import deleteBtn from '@/components/button/delete'
@@ -36,14 +36,16 @@ export default {
     reloadBtn,
     todoForm,
   },
-  async fetch({ store }) {
-    if (store.state.todos.list.length === 0) {
-      await store.dispatch('todos/fetchList')
-    }
-  },
+  // async fetch({ store }) {
+  //   if (store.state.todos.list.length === 0) {
+  //     await store.dispatch('todos/fetchList')
+  //   }
+  // },
   data() {
     return {
-      todo: {},
+      todo: {
+        id: -1,
+      },
     }
   },
   computed: {
@@ -51,10 +53,17 @@ export default {
       getById: 'todos/getById',
     }),
   },
-  mounted() {
+  // mounted() {
+  //   this.todo = Object.assign({}, this.getById(this.$route.params.id))
+  // },
+  async mounted() {
+    if (this.$store.state.todos.list.length === 0) {
+      await this.fetchList()
+    }
     this.todo = Object.assign({}, this.getById(this.$route.params.id))
   },
   methods: {
+    ...mapActions('todos', ['fetchList']),
     reloaded(item) {
       this.todo = item
     },

@@ -1,7 +1,6 @@
 {
   "menu": {
-    "index": "ようこそ",
-    "inspire": "刺激する",
+    "index": "ホーム",
     "todos": "ToDo",
     "users": "ユーザー"
   },
@@ -20,31 +19,15 @@
     "cancel": "キャンセル",
     "actions": "操作"
   },
-  "index": {
-    "cardTitle": "ようこそ ",
-    "cardText": {
-      "p1": "Vuetifyは、Vue.js用のプログレッシブマテリアルデザインコンポーネントフレームワークです。 開発者が素晴らしいアプリケーションを作成できるように設計されています。",
-      "p2": "Vuetifyの詳細については、<a href='https://vuetifyjs.com' target='_blank' rel='noopener noreferrer'>ドキュメント</a>をご覧ください。",
-      "p3": "ご不明な点がございましたら、公式<a href='https://chat.vuetifyjs.com/' target='_blank' rel='noopener noreferrer' title='chat' >ディスコード</a>にご参加ください。",
-      "p4": "バグを見つけましたか？ GitHubの<a href='https://github.com/vuetifyjs/vuetify/issues' target='_blank' rel='noopener noreferrer' title='contribute'>issue board</a>で報告してください。",
-      "p5": "Vuetifyでの開発に感謝します。今後、よりエキサイティングな機能を提供できることを楽しみにしています。",
-      "p6": "John Leider"
-    },
-    "nuxtDocumentation": "Nuxt ドキュメント",
-    "nuxtGitHub": "Nuxt GitHub",
-    "continue": "続ける"
-  },
-  "inspire": {
-    "message": "まず、問題を解決します。 次に、コードを記述します。",
-    "from": "John Johnson"
-  },
   "todos": {
+    "description": "ToDo進捗状況の参照、編集、新規作成ができます。",
     "title": "タイトル",
     "userId": "ユーザーID",
     "completed": "完了",
     "uncompleted": "未完了"
   },
   "users": {
+    "description": "ユーザー情報の参照、編集、新規作成ができます。",
     "name": "氏名",
     "username": "ユーザー名",
     "email": "メールアドレス",

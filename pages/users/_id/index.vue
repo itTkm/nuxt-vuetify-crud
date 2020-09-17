@@ -23,6 +23,11 @@ export default {
   data() {
     return {
       userId: this.$route.params.id,
+      user: {
+        name: '',
+        id: -1,
+        email: '',
+      },
     }
   },
 }

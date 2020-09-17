@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import backBtn from '@/components/button/back'
 import listBtn from '@/components/button/list'
 import editBtn from '@/components/button/edit'
@@ -42,26 +42,30 @@ export default {
     deleteBtn,
     reloadBtn,
   },
-  async fetch({ store }) {
-    if (store.state.todos.list.length === 0) {
-      await store.dispatch('todos/fetchList')
-    }
-  },
+  // async fetch({ store }) {
+  //   if (store.state.todos.list.length === 0) {
+  //     await store.dispatch('todos/fetchList')
+  //   }
+  // },
   data() {
     return {
-      todo: [],
+      todo: {
+        id: -1,
+      },
       userId: this.$route.params.id,
     }
   },
   computed: {
-    ...mapGetters({
-      getById: 'todos/getById',
-    }),
+    ...mapGetters('todos', ['getById']),
   },
-  mounted() {
+  async mounted() {
+    if (this.$store.state.todos.list.length === 0) {
+      await this.fetchList()
+    }
     this.todo = this.getById(this.$route.params.id)
   },
   methods: {
+    ...mapActions('todos', ['fetchList']),
     reloaded(item) {
       this.todo = item
     },

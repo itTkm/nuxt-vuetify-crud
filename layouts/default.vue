@@ -79,12 +79,6 @@
 </template>
 
 <script>
-// import {
-//   localize,
-// } from 'vee-validate'
-// import ja from 'vee-validate/dist/locale/ja.json'
-// import en from 'vee-validate/dist/locale/en.json'
-
 export default {
   data() {
     return {
@@ -104,12 +98,6 @@ export default {
           title: this.$t('menu.index'),
           to: this.localePath('index', this.$i18n.locale),
           exact: true, // If root page, it should be "true".
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: this.$t('menu.inspire'),
-          to: this.localePath('inspire', this.$i18n.locale),
-          exact: false, // If the page has child pages (e.g. /inspire/edit), it should be "false".
         },
         {
           icon: 'mdi-format-list-checks',

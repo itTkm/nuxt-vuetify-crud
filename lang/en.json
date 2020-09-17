@@ -1,32 +1,53 @@
 {
   "menu": {
-    "index": "Welcome",
-    "inspire": "Inspire",
+    "index": "Home",
     "todos": "ToDos",
     "users": "Users"
   },
-  "index": {
-    "cardTitle": "Welcome to the ",
-    "cardText": {
-      "p1": "Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.",
-      "p2": "For more information on Vuetify, check out the <a href='https://vuetifyjs.com' target='_blank' rel='noopener noreferrer'>documentation</a>.",
-      "p3": "If you have questions, please join the official <a href='https://chat.vuetifyjs.com/' target='_blank' rel='noopener noreferrer' title='chat' >discord</a>.",
-      "p4": "Find a bug? Report it on the github <a href='https://github.com/vuetifyjs/vuetify/issues' target='_blank' rel='noopener noreferrer' title='contribute'>issue board</a>.",
-      "p5": "Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.",
-      "p6": "John Leider"
-    },
-    "nuxtDocumentation": "Nuxt Documentation",
-    "nuxtGitHub": "Nuxt GitHub",
-    "continue": "Continue"
-  },
-  "inspire": {
-    "message": "First, solve the problem. Then, write the code.",
-    "from": "John Johnson"
+  "common": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this?",
+    "search": "Search",
+    "filter": "Filter",
+    "show": "Show",
+    "save": "Save",
+    "list": "List",
+    "back": "Back",
+    "reload": "Reload",
+    "cancel": "Cancel",
+    "actions": "Actions"
   },
   "todos": {
+    "description": "You can browse, edit, and create new tasks.",
     "title": "Title",
     "userId": "User ID",
-    "completed": "Completed"
+    "completed": "Completed",
+    "uncompleted": "Uncompleted"
+  },
+  "users": {
+    "description": "You can browse, edit, and create new users.",
+    "name": "Name",
+    "username": "Username",
+    "email": "Email",
+    "address": {
+      "street": "Street",
+      "suite": "Suite",
+      "city": "City",
+      "zipcode": "Zipcode",
+      "geo": {
+        "lat": "Lat",
+        "lng": "Lng"
+      }
+    },
+    "phone": "Phone",
+    "website": "Website",
+    "company": {
+      "name": "Company name",
+      "catchPhrase": "Catch phrase",
+      "bs": "bs"
+    }
   },
   "switchLanguage": "Switch language",
   "switchTheme": "Switch theme"

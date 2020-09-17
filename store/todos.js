@@ -1,5 +1,7 @@
 const baseUrl = 'https://jsonplaceholder.typicode.com/todos'
 
+// export const namespaced = true
+
 export const state = () => ({
   list: [],
 })
