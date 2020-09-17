@@ -70,7 +70,7 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-footer :absolute="!fixed" app>
+    <v-footer :absolute="!fixed" inset app>
       <span>&copy; {{ new Date().getFullYear() }} {{ author }}</span>
       <v-spacer />
       <span>v{{ version }}</span>
