@@ -4,21 +4,21 @@
       <v-card>
         <v-card-actions>
           <back-btn />
-          <list-btn path="todos" />
+          <list-btn path="posts" />
           <v-spacer />
-          <edit-btn :id="todo.id" path="todos" />
-          <delete-btn :id="todo.id" path="todos" />
-          <reload-btn :id="todo.id" path="todos" @reloaded="reloaded" />
+          <edit-btn :id="post.id" path="posts" />
+          <delete-btn :id="post.id" path="posts" />
+          <reload-btn :id="post.id" path="posts" @reloaded="reloaded" />
         </v-card-actions>
       </v-card>
     </p>
     <p>
       <v-card>
-        <v-card-title>{{ todo.title }}</v-card-title>
+        <v-card-title>{{ post.title }}</v-card-title>
         <v-card-text>
           <div>
-            <v-icon small>mdi-account</v-icon> {{ todo.userId }}<br />
-            <v-icon small>mdi-check</v-icon> {{ todo.completed }}
+            <v-icon small>mdi-account</v-icon> {{ post.userId }}<br />
+            <v-icon small>mdi-text-subject</v-icon> {{ post.body }}
           </div>
         </v-card-text>
       </v-card>
@@ -44,25 +44,25 @@ export default {
   },
   data() {
     return {
-      todo: {
+      post: {
         id: -1,
       },
       userId: this.$route.params.id,
     }
   },
   computed: {
-    ...mapGetters('todos', ['getById']),
+    ...mapGetters('posts', ['getById']),
   },
   async mounted() {
-    if (this.$store.state.todos.list.length === 0) {
+    if (this.$store.state.posts.list.length === 0) {
       await this.fetchList()
     }
-    this.todo = this.getById(this.$route.params.id)
+    this.post = this.getById(this.$route.params.id)
   },
   methods: {
-    ...mapActions('todos', ['fetchList']),
+    ...mapActions('posts', ['fetchList']),
     reloaded(item) {
-      this.todo = item
+      this.post = item
     },
   },
 }

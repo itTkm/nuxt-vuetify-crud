@@ -37,6 +37,12 @@ export default {
     return {
       cards: [
         {
+          path: 'posts',
+          title: this.$t('menu.posts'),
+          description: this.$t('posts.description'),
+          src: 'https://picsum.photos/id/24/400/300',
+        },
+        {
           path: 'todos',
           title: this.$t('menu.todos'),
           description: this.$t('todos.description'),

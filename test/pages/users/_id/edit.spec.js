@@ -4,8 +4,8 @@ import Vuex from 'vuex'
 import { cloneDeep } from 'lodash'
 
 // Components
-import index from '@/pages/todos/index'
-import storeConfig from '@/test/store/todos/config'
+import edit from '@/pages/users/_id/edit'
+import storeConfig from '@/test/store/users/config'
 
 // Utilities
 import { createLocalVue, shallowMount } from '@vue/test-utils'
@@ -14,15 +14,24 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 localVue.use(new Vuetify())
 
-describe('pages/todos/index', () => {
+describe('pages/users/_id/edit', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = shallowMount(index, {
-      store: new Vuex.Store(cloneDeep(storeConfig)),
+    wrapper = shallowMount(edit, {
+      store: new Vuex.Store({
+        modules: {
+          users: cloneDeep(storeConfig),
+        },
+      }),
       localVue,
       mocks: {
         $t: (msg) => msg,
+        $route: {
+          params: {
+            id: 1,
+          },
+        },
       },
     })
   })

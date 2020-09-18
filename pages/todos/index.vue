@@ -107,7 +107,6 @@ export default {
         {
           text: this.$t('todos.title'),
           align: 'left',
-          sortable: false,
           value: 'title',
         },
         { text: this.$t('todos.userId'), value: 'userId' },
