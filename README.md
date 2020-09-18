@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project was customized from [initial template](https://github.com/nuxt/create-nuxt-app/tree/master/packages/cna-template/template/frameworks/vuetify) that created with below settings.
+This project is based on [nuxt-vuetify-custom](https://github.com/itTkm/nuxt-vuetify-custom). It also supports CRUD pages with [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
 ```
 npx create-nuxt-app nuxt-vuetify-custom
