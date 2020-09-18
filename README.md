@@ -4,24 +4,6 @@
 
 This project is based on [nuxt-vuetify-custom](https://github.com/itTkm/nuxt-vuetify-custom). It also supports CRUD pages with [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
-```
-npx create-nuxt-app nuxt-vuetify-custom
-
-create-nuxt-app v3.2.0
-✨  Generating Nuxt.js project in nuxt-vuetify-custom
-? Project name: nuxt-vuetify-custom
-? Programming language: JavaScript
-? Package manager: Yarn
-? UI framework: Vuetify.js
-? Nuxt.js modules: Axios, Progressive Web App (PWA), Content
-? Linting tools: ESLint, Prettier, Lint staged files, StyleLint
-? Testing framework: Jest
-? Rendering mode: Single Page App
-? Deployment target: Static (Static/JAMStack hosting)
-? Development tools: jsconfig.json (Recommended for VS Code if you're not using
-typescript)
-```
-
 ## What has been customized?
 
 - Remove unnecessary code such as demo code.
