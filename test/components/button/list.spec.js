@@ -21,6 +21,9 @@ describe('components/button/list', () => {
       mocks: {
         $t: (msg) => msg,
       },
+      propsData: {
+        path: 'todos',
+      },
     })
   })
 

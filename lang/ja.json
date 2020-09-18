@@ -1,7 +1,8 @@
 {
   "menu": {
     "index": "ホーム",
-    "todos": "ToDo",
+    "posts": "投稿",
+    "todos": "やること",
     "users": "ユーザー"
   },
   "common": {
@@ -18,6 +19,12 @@
     "reload": "更新",
     "cancel": "キャンセル",
     "actions": "操作"
+  },
+  "posts": {
+    "description": "投稿の参照、編集、新規作成ができます。",
+    "title": "タイトル",
+    "userId": "ユーザーID",
+    "body": "本文"
   },
   "todos": {
     "description": "ToDo進捗状況の参照、編集、新規作成ができます。",

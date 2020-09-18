@@ -5,7 +5,7 @@ import { cloneDeep } from 'lodash'
 
 // Components
 import edit from '@/pages/todos/_id/edit'
-import storeConfig from '@/test/store-config/todos'
+import storeConfig from '@/test/store/todos/config'
 
 // Utilities
 import { createLocalVue, shallowMount } from '@vue/test-utils'

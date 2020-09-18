@@ -100,6 +100,12 @@ export default {
           exact: true, // If root page, it should be "true".
         },
         {
+          icon: 'mdi-message-text-outline',
+          title: this.$t('menu.posts'),
+          to: this.localePath('posts', this.$i18n.locale),
+          exact: false, // If the page has child pages (e.g. /inspire/edit), it should be "false".
+        },
+        {
           icon: 'mdi-format-list-checks',
           title: this.$t('menu.todos'),
           to: this.localePath('todos', this.$i18n.locale),

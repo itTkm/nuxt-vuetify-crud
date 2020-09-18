@@ -1,6 +1,7 @@
 {
   "menu": {
     "index": "Home",
+    "posts": "Posts",
     "todos": "ToDos",
     "users": "Users"
   },
@@ -18,6 +19,12 @@
     "reload": "Reload",
     "cancel": "Cancel",
     "actions": "Actions"
+  },
+  "posts": {
+    "description": "You can browse, edit, and create new posts.",
+    "title": "Title",
+    "userId": "User ID",
+    "body": "Body"
   },
   "todos": {
     "description": "You can browse, edit, and create new tasks.",

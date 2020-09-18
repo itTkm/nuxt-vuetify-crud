@@ -21,6 +21,9 @@ describe('components/button/create', () => {
       mocks: {
         $t: (msg) => msg,
       },
+      propsData: {
+        path: 'todos',
+      },
     })
   })
 

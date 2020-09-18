@@ -1,4 +1,4 @@
-const baseUrl = 'https://jsonplaceholder.typicode.com/todos'
+const baseUrl = 'https://jsonplaceholder.typicode.com/users'
 
 export const state = () => ({
   list: [],

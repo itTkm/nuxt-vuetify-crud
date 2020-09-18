@@ -21,6 +21,10 @@ describe('components/button/delete', () => {
       mocks: {
         $t: (msg) => msg,
       },
+      propsData: {
+        path: 'todos',
+        id: 1,
+      },
     })
   })
 

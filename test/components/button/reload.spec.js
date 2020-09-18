@@ -21,6 +21,9 @@ describe('components/button/reload', () => {
       mocks: {
         $t: (msg) => msg,
       },
+      propsData: {
+        path: 'todos',
+      },
     })
   })
 

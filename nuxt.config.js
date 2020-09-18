@@ -104,7 +104,7 @@ export default {
    ** See https://github.com/mole-inc/nuxt-validate#readme
    */
   nuxtValidate: {
-    rules: ['required', 'regex', 'numeric'],
+    rules: ['required', 'regex', 'numeric', 'email'],
     nuxti18n: true,
   },
   /**
