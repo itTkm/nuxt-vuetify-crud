@@ -3,17 +3,23 @@
     <v-card>
       <v-card-title>{{ this.$t('common.deleteConfirm') }}</v-card-title>
       <v-card-text>
+        <template v-if="route === 'posts'">
+          <strong>{{ item.title }}</strong
+          ><br />
+          <v-icon small>mdi-account</v-icon> {{ item.userId }}<br />
+          <v-icon small>mdi-text-subject</v-icon> {{ item.body }}
+        </template>
         <template v-if="route === 'todos'">
           <strong>{{ item.title }}</strong
           ><br />
-          <v-icon>mdi-account</v-icon>{{ item.userId }}<br />
-          <v-icon>mdi-check</v-icon>{{ item.completed }}
+          <v-icon small>mdi-account</v-icon> {{ item.userId }}<br />
+          <v-icon small>mdi-check</v-icon> {{ item.completed }}
         </template>
         <template v-if="route === 'users'">
           <strong>{{ item.name }}</strong
           ><br />
-          <v-icon>mdi-pound-box</v-icon>{{ item.id }}<br />
-          <v-icon>mdi-email</v-icon>{{ item.email }}
+          <v-icon small>mdi-pound-box</v-icon> {{ item.id }}<br />
+          <v-icon small>mdi-email</v-icon> {{ item.email }}
         </template>
       </v-card-text>
       <v-card-actions>

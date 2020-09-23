@@ -39,32 +39,33 @@
           @click:row="(item) => show(item.id)"
         >
           <template v-slot:[`item.actions`]="{ item }">
-            <edit-btn :id="item.id" path="todos" small />
-            <delete-btn :id="item.id" path="todos" :item="item" small />
+            <edit-btn :id="item.id" path="users" small />
+            <delete-btn :id="item.id" path="users" :item="item" small />
           </template>
         </v-data-table>
       </v-card>
     </p>
+    <delete-confirm ref="deleteConfirm"></delete-confirm>
   </div>
 </template>
 
 <script>
-// import deleteConfirm from '@/components/deleteConfirm.vue'
+import deleteConfirm from '@/components/deleteConfirm.vue'
 import backBtn from '@/components/button/back'
 import createBtn from '@/components/button/create'
 import reloadBtn from '@/components/button/reload'
-// import editBtn from '@/components/button/edit'
-// import deleteBtn from '@/components/button/delete'
+import editBtn from '@/components/button/edit'
+import deleteBtn from '@/components/button/delete'
 import filterBtn from '@/components/button/filter'
 
 export default {
   components: {
-    // deleteConfirm,
+    deleteConfirm,
     backBtn,
     createBtn,
     reloadBtn,
-    // editBtn,
-    // deleteBtn,
+    editBtn,
+    deleteBtn,
     filterBtn,
   },
   async fetch({ store }) {
