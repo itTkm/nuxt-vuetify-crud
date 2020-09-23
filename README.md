@@ -27,6 +27,12 @@ This project is based on [nuxt-vuetify-custom](https://github.com/itTkm/nuxt-vue
   - Menu items
   - Language switch
   - Theme switch
+- Add CRUD example functions and pages with [JSONPlaceholder](https://jsonplaceholder.typicode.com/) API.
+  - List page
+  - Create page
+  - Edit page
+  - Show page
+  - Delete confirmation dialog
 
 ## Build Setup
 
